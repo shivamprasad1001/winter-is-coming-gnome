@@ -11,6 +11,29 @@ if command -v gnome-extensions >/dev/null 2>&1; then
   gnome-extensions uninstall "$uuid" 2>/dev/null || true
 fi
 
+# Remove from enabled-extensions in GSettings
+if command -v gjs >/dev/null 2>&1; then
+  gjs -c "
+    const { Gio } = imports.gi;
+    try {
+      const s = new Gio.Settings({ schema_id: 'org.gnome.shell' });
+      let list = s.get_strv('enabled-extensions').filter(x => x !== '$uuid');
+      s.set_strv('enabled-extensions', list);
+    } catch (e) {}
+  " 2>/dev/null || true
+elif command -v python3 >/dev/null 2>&1; then
+  python3 -c "
+try:
+    import gi
+    from gi.repository import Gio
+    s = Gio.Settings.new('org.gnome.shell')
+    exts = [x for x in s.get_strv('enabled-extensions') if x != '$uuid']
+    s.set_strv('enabled-extensions', exts)
+except Exception:
+    pass
+" 2>/dev/null || true
+fi
+
 if [ "${1:-}" = "--purge" ]; then
   if command -v gsettings >/dev/null 2>&1; then
     [ -d "$ext_dir/schemas" ] && gsettings --schemadir "$ext_dir/schemas" reset-recursively "$schema" 2>/dev/null || true

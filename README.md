@@ -37,7 +37,7 @@ Paste this into your terminal:
 curl -fsSL https://raw.githubusercontent.com/shivamprasad1001/winter-is-coming-gnome/main/scripts/install.sh | bash
 ```
 
-> **Wayland note:** GNOME Shell on Wayland scans newly added extensions at session start. If it doesn't turn on right away, **log out and log back in once**, then open the **Extensions** app and switch **WinterIsComing** ON (or run `gnome-extensions enable winter-is-coming@linux`).
+> **Auto-Enable Note:** The installer automatically enables WinterIsComing in your GNOME Shell settings (`enabled-extensions`). If you are on Wayland and installing for the first time, GNOME Shell indexes new extension folders upon session start — simply log out and back in, and snow will start falling automatically without any manual toggling!
 
 ### From Source
 

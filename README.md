@@ -1,5 +1,13 @@
 # ❄ WinterIsComing for GNOME Shell
 
+<p>
+  <a href="https://github.com/shivamprasad1001/winter-is-coming-gnome/actions/workflows/ci.yml"><img src="https://github.com/shivamprasad1001/winter-is-coming-gnome/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <img src="https://img.shields.io/badge/GNOME%20Shell-45--51-4a86cf?logo=gnome&logoColor=white" alt="GNOME Shell 45-51">
+  <img src="https://img.shields.io/badge/Wayland%20%26%20X11-supported-2ea44f" alt="Wayland and X11 supported">
+  <img src="https://img.shields.io/badge/version-1.0.0-informational" alt="Version 1.0.0">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
+
 A native Linux / GNOME Shell port of [yike-shi/WINTER_IS_COMING](https://github.com/yike-shi/WINTER_IS_COMING) (**GNOME 45–51**, Wayland & X11).
 
 Snow drifts across your desktop, settles on top of open windows and your bottom dock/screen edge, and flies off when you move or close windows. Roll snowballs with your mouse, push or carry them around, stack three into a snowman, and hang twinkling fairy lights.

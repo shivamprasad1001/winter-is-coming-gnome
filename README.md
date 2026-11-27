@@ -21,18 +21,23 @@ Snow drifts across your desktop, settles on top of open windows and your bottom 
 
 ## Installation
 
+### Quick Install (one command)
+
+Paste this into your terminal:
+
 ```sh
-git clone <your-repo-url>
-cd winter-is-coming-linux
-make install
+curl -fsSL https://raw.githubusercontent.com/shivamprasad1001/winter-is-coming-gnome/main/scripts/install.sh | bash
 ```
 
-Or run `./scripts/install.sh` directly.
+> **Wayland note:** GNOME Shell on Wayland scans newly added extensions at session start. If it doesn't turn on right away, **log out and log back in once**, then open the **Extensions** app and switch **WinterIsComing** ON (or run `gnome-extensions enable winter-is-coming@linux`).
 
-> **Wayland note:** GNOME Shell on Wayland scans newly added extensions at session start. If `gnome-extensions enable winter-is-coming@linux` says the extension does not exist yet, log out and back in once, then run:
-> ```sh
-> gnome-extensions enable winter-is-coming@linux
-> ```
+### From Source
+
+```sh
+git clone https://github.com/shivamprasad1001/winter-is-coming-gnome.git
+cd winter-is-coming-gnome
+make install
+```
 
 ## Controls
 
@@ -81,6 +86,12 @@ make clean    # Remove dist/
 ```
 
 ## Uninstall
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/shivamprasad1001/winter-is-coming-gnome/main/scripts/uninstall.sh | bash
+```
+
+Or from a local clone:
 
 ```sh
 ./scripts/uninstall.sh          # Remove extension (keeps GSettings)

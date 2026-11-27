@@ -1,0 +1,18 @@
+{
+  "uuid": "winter-is-coming@linux",
+  "name": "WinterIsComing",
+  "description": "Desktop snowfall for GNOME Shell — snow settles on windows and the bottom dock/edge, roll snowballs, stack a snowman, and hang fairy lights.",
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.winter-is-coming",
+  "url": "https://github.com/yike-shi/WINTER_IS_COMING",
+  "version": 1,
+  "version-name": "1.0.0"
+}

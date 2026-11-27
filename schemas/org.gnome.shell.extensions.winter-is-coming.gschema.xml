@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <enum id="org.gnome.shell.extensions.winter-is-coming.SnowAmount">
+    <value nick="light" value="0"/>
+    <value nick="medium" value="1"/>
+    <value nick="heavy" value="2"/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.winter-is-coming"
+          path="/org/gnome/shell/extensions/winter-is-coming/">
+    <key name="snow-amount" enum="org.gnome.shell.extensions.winter-is-coming.SnowAmount">
+      <default>'medium'</default>
+      <summary>Snowflake density</summary>
+      <description>Controls the target number of active snowflakes on screen (light, medium, or heavy).</description>
+    </key>
+
+    <key name="fairy-lights" type="b">
+      <default>false</default>
+      <summary>Hang fairy lights</summary>
+      <description>Display animated twinkling fairy lights along the top edge of open windows.</description>
+    </key>
+
+    <key name="snow-on-windows" type="b">
+      <default>true</default>
+      <summary>Settle snow on windows</summary>
+      <description>Allow snowflakes to pile up on top of open application windows.</description>
+    </key>
+
+    <key name="seen-guide" type="b">
+      <default>false</default>
+      <summary>How-to-play guide shown</summary>
+      <description>Tracks whether the welcome how-to-play dialog has already been shown.</description>
+    </key>
+  </schema>
+</schemalist>

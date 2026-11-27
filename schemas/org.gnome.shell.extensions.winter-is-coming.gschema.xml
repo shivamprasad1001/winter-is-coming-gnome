@@ -13,23 +13,36 @@
       <summary>Snowflake density</summary>
       <description>Controls the target number of active snowflakes on screen (light, medium, or heavy).</description>
     </key>
-
     <key name="fairy-lights" type="b">
       <default>false</default>
       <summary>Hang fairy lights</summary>
       <description>Display animated twinkling fairy lights along the top edge of open windows.</description>
     </key>
-
     <key name="snow-on-windows" type="b">
       <default>true</default>
       <summary>Settle snow on windows</summary>
       <description>Allow snowflakes to pile up on top of open application windows.</description>
     </key>
-
     <key name="seen-guide" type="b">
       <default>false</default>
       <summary>How-to-play guide shown</summary>
       <description>Tracks whether the welcome how-to-play dialog has already been shown.</description>
+    </key>
+    <key name="music-track-uri" type="s">
+      <default>''</default>
+      <summary>Selected local music file</summary>
+      <description>File URI selected by the user for local playback.</description>
+    </key>
+    <key name="music-autoplay" type="b">
+      <default>true</default>
+      <summary>Autoplay selected music</summary>
+      <description>Automatically play the selected local track when the extension starts.</description>
+    </key>
+    <key name="music-volume" type="d">
+      <range min="0.0" max="1.0"/>
+      <default>0.4</default>
+      <summary>Music volume</summary>
+      <description>Playback volume from silent to full volume.</description>
     </key>
   </schema>
 </schemalist>

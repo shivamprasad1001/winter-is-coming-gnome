@@ -8,9 +8,24 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
 
-A native Linux / GNOME Shell port of [yike-shi/WINTER_IS_COMING](https://github.com/yike-shi/WINTER_IS_COMING) (**GNOME 45–51**, Wayland & X11).
+A native Linux / GNOME Shell port of [yike-shi/WINTER_IS_COMING](https://github.com/yike-shi/WINTER_IS_COMING). It brings the original desktop snowfall experience to **GNOME 45–51** on **Wayland and X11**, with Linux-native integration and additional features.
 
 Snow drifts across your desktop, settles on top of open windows and your bottom dock/screen edge, and flies off when you move or close windows. Roll snowballs with your mouse, push or carry them around, stack three into a snowman, and hang twinkling fairy lights.
+
+## What's new in this GNOME version?
+
+Compared with the original macOS and Windows app, this repository adapts the experience into a native GNOME Shell extension and adds Linux-specific functionality:
+
+- **Native GNOME Shell extension**: Runs directly inside GNOME Shell instead of as a separate macOS or Windows desktop application.
+- **Wayland and X11 support**: Designed for GNOME Shell 45–51.
+- **GNOME top-bar menu**: Control snowfall, fairy lights, music, and other actions from the **❄** indicator.
+- **GTK4 / Libadwaita preferences**: Configure the extension through the GNOME Extensions preferences UI.
+- **GNOME settings integration**: Persistent preferences through GSettings, with automatic hiding during the GNOME Overview and lock screen.
+- **Linux-native installation and packaging**: Install, uninstall, and build the extension with the included scripts and Makefile.
+- **Automated checks**: Includes syntax/schema checks, GJS tests, packaging checks, and a GitHub Actions workflow.
+- **Local music player**: Select an audio file already on your device and control playback from the top-bar menu. The selected file, autoplay setting, and volume are saved. No music is downloaded and no online audio source is contacted.
+
+The original project provides the core snowfall, snowball, snowman, and fairy-light concept. This repository focuses on bringing that experience to the Linux GNOME desktop.
 
 ## Features
 
@@ -75,7 +90,7 @@ The music player never downloads a track or contacts an online audio source. Sel
 ├── lib/
 │   ├── snowWorld.js              # Pure JS physics, piles, occlusion, snowballs, lights
 │   ├── renderer.js               # Cairo renderer for piles, light wires, and snowballs
-│   ├── gpuSprites.js             # Cogl.Texture2D + Clutter.Effect GPU sprite batcher
+│   ├── gpuSprites.js              # Cogl.Texture2D + Clutter.Effect GPU sprite batcher
 │   ├── indicator.js              # Top-bar menu, music controls & How-to-Play dialog
 │   └── musicPlayer.js             # Local GStreamer playback
 ├── schemas/

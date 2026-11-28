@@ -11,14 +11,16 @@ if command -v gnome-extensions >/dev/null 2>&1; then
   gnome-extensions uninstall "$uuid" 2>/dev/null || true
 fi
 
-# Remove from enabled-extensions in GSettings
+# Clean up both enabled and disabled lists in GSettings
 if command -v gjs >/dev/null 2>&1; then
   gjs -c "
     const { Gio } = imports.gi;
     try {
       const s = new Gio.Settings({ schema_id: 'org.gnome.shell' });
-      let list = s.get_strv('enabled-extensions').filter(x => x !== '$uuid');
-      s.set_strv('enabled-extensions', list);
+      let en = s.get_strv('enabled-extensions').filter(x => x !== '$uuid');
+      s.set_strv('enabled-extensions', en);
+      let dis = s.get_strv('disabled-extensions').filter(x => x !== '$uuid');
+      s.set_strv('disabled-extensions', dis);
     } catch (e) {}
   " 2>/dev/null || true
 elif command -v python3 >/dev/null 2>&1; then
@@ -27,8 +29,10 @@ try:
     import gi
     from gi.repository import Gio
     s = Gio.Settings.new('org.gnome.shell')
-    exts = [x for x in s.get_strv('enabled-extensions') if x != '$uuid']
-    s.set_strv('enabled-extensions', exts)
+    en = [x for x in s.get_strv('enabled-extensions') if x != '$uuid']
+    s.set_strv('enabled-extensions', en)
+    dis = [x for x in s.get_strv('disabled-extensions') if x != '$uuid']
+    s.set_strv('disabled-extensions', dis)
 except Exception:
     pass
 " 2>/dev/null || true

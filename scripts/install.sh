@@ -59,21 +59,26 @@ if [ -d "$ext_dir/schemas" ] && command -v glib-compile-schemas >/dev/null 2>&1;
   glib-compile-schemas "$ext_dir/schemas" 2>/dev/null || true
 fi
 
-# AUTO-ENABLE in GNOME Shell settings so user never has to enable it manually
+# AUTO-ENABLE in GNOME Shell settings
 echo "Auto-enabling $uuid in GNOME settings ..."
 if command -v gsettings >/dev/null 2>&1; then
   gsettings set org.gnome.shell disable-user-extensions false 2>/dev/null || true
 fi
 
+# 1. Remove from 'disabled-extensions' (GNOME prioritizes disabled over enabled)
+# 2. Add to 'enabled-extensions'
 if command -v gjs >/dev/null 2>&1; then
   gjs -c "
     const { Gio } = imports.gi;
     try {
       const s = new Gio.Settings({ schema_id: 'org.gnome.shell' });
-      let list = s.get_strv('enabled-extensions');
-      if (!list.includes('$uuid')) {
-        list.push('$uuid');
-        s.set_strv('enabled-extensions', list);
+      let dis = s.get_strv('disabled-extensions').filter(x => x !== '$uuid');
+      s.set_strv('disabled-extensions', dis);
+
+      let en = s.get_strv('enabled-extensions');
+      if (!en.includes('$uuid')) {
+        en.push('$uuid');
+        s.set_strv('enabled-extensions', en);
       }
     } catch (e) {}
   " 2>/dev/null || true
@@ -83,10 +88,12 @@ try:
     import gi
     from gi.repository import Gio
     s = Gio.Settings.new('org.gnome.shell')
-    exts = list(s.get_strv('enabled-extensions'))
-    if '$uuid' not in exts:
-        exts.append('$uuid')
-        s.set_strv('enabled-extensions', exts)
+    dis = [x for x in s.get_strv('disabled-extensions') if x != '$uuid']
+    s.set_strv('disabled-extensions', dis)
+    en = list(s.get_strv('enabled-extensions'))
+    if '$uuid' not in en:
+        en.append('$uuid')
+        s.set_strv('enabled-extensions', en)
 except Exception:
     pass
 " 2>/dev/null || true
@@ -98,6 +105,13 @@ if gnome-extensions enable "$uuid" 2>/dev/null; then
   activated=true
 elif command -v busctl >/dev/null 2>&1; then
   if busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions EnableExtension s "$uuid" 2>/dev/null | grep -q "true"; then
+    activated=true
+  fi
+fi
+
+# Check whether GNOME Shell has it ACTIVE right now
+if command -v gnome-extensions >/dev/null 2>&1; then
+  if gnome-extensions info "$uuid" 2>/dev/null | grep -iq "State: ACTIVE"; then
     activated=true
   fi
 fi
